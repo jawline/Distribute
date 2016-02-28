@@ -1,14 +1,14 @@
-mod listener;
-mod node;
+extern crate fccore;
+extern crate fcwebserve;
 
-use std::net::{TcpListener, TcpStream};
-
-fn handle_client(stream: TcpStream) {
-	println!("Handling new node");
-}
+const BASE_CFG_FILE: &'static str = "./configs/base.cfg";
+const WEBSERVE_CFG_FILE: &'static str = "./configs/webserve.cfg";
 
 fn main() {
-    println!("C&C Central Node");
+	let (core, handle) = fccore::spawn_fc(BASE_CFG_FILE);
+	fcwebserve::spawn(&core, WEBSERVE_CFG_FILE);
 
-    listener::listen("127.0.0.1:13450", handle_client);
+	if handle.join().is_err() {
+		panic!("Error in FCCore thread");
+	}
 }

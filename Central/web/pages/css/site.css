@@ -1,0 +1,145 @@
+html, body, #entire-container {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+body > #entire-container {
+  min-height: 100%;
+  height: auto;
+}
+
+.mainsite-header {
+  margin-left: 15px;
+}
+
+.mynav {
+  color: white;
+}
+
+.maxfill {
+  max-width: 100%;
+}
+
+.thumb {
+  width: 100px;
+}
+
+.nudged {
+  margin-left: 15px;
+}
+
+#navbar-clickable {
+  background: none;
+  margin-right: 10px;
+  height: 44px;
+  border: 0;
+  width: 44px;
+}
+
+.parsed-body h1 {font-size:25px;}
+.parsed-body h2 {font-family: headerFont; font-size:20px;}
+.parsed-body a { color: #555555; }
+.parsed-body a:hover { color: #888888; }
+.parsed-body p { font-size:18px; }
+
+/** Bootstrap overides */
+.navbar-default {
+	margin: 0px;
+	border-radius: 0px;
+	padding: 0px;
+	border: 0;
+}
+
+.panel-default {
+  border-radius: 0px;
+}
+
+.small-gap {
+ margin-top: 1.5em;
+}
+
+.navbar ul {
+  text-align: center;
+}
+
+.page-background {
+  background-color: #FAFAFA;
+}
+
+.shadowed {
+  box-shadow: 0px 2px 1px #DBDBDB;
+}
+
+/** Pintrest style tiling **/
+.columns{
+ -webkit-column-gap:   0px;
+
+   -moz-column-gap:      0px;
+
+   column-gap:           0px;  
+}
+.columns-5 {
+   /* Prevent vertical gaps */
+   line-height: 0;
+
+        -webkit-column-count: 5;
+        -moz-column-count:    5;
+        column-count:         5;
+}
+.columns-3 {
+   /* Prevent vertical gaps */
+   line-height: 0;
+
+        -webkit-column-count: 3;
+        -moz-column-count:    3;
+        column-count:         3;
+  
+   
+   -webkit-column-gap:   0px;
+
+   -moz-column-gap:      0px;
+
+   column-gap:           0px;  
+}
+
+@media (max-width: 1200px){
+    .columns-5{
+        -webkit-column-count: 4;
+        -moz-column-count:    4;
+        column-count:         4;
+    }
+}
+@media (max-width: 992px){
+    .columns-5{
+        -webkit-column-count: 3;
+        -moz-column-count:    3;
+        column-count:         3;
+    }
+    .columns-3{
+        -webkit-column-count: 2;
+        -moz-column-count:    2;
+        column-count:         2;
+    }
+}
+@media (max-width: 768px){
+    .columns-5{
+        -webkit-column-count: 2;
+        -moz-column-count:    2;
+        column-count:         2;
+    }
+}
+
+@media (max-width: 400px){
+    .columns-5{
+        -webkit-column-count: 1;
+        -moz-column-count:    1;
+        column-count:         1;
+    }
+    .columns-3{
+        -webkit-column-count: 1;
+        -moz-column-count:    1;
+        column-count:         1;
+    }
+}

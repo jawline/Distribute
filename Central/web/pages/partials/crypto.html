@@ -1,0 +1,32 @@
+<div class="container">
+
+    <div class="small-gap panel panel-default">
+        <div class="panel-body">
+        <h2>
+		 Cryptography
+		</h2>
+            <hr class="featurette-divider">
+            <div>
+                <p>If one were to look up the Oxford dictionary definition of cryptography, they would find “The art of writing or solving codes.” [1] This may indeed also be what many people think of when they hear the word. Historically this is a fair representation of the word, but cryptography today encompasses much more than this. Modern cryptography takes into account mechanisms that enable confidentiality of data, as well as ensure its integrity and also manage protocols for its authentication. 
+Some may also think of cryptography and cyber security as synonymous, but this is not always the case. It’s important to understand cryptography’s role in the security of a system and think of it as one of many tools that enable the securitization of digital information or systems against adversarial attacks.
+We shall briefly explain two important methods of key management in cryptography, and how this lends itself to a particular type of cryptographic architecture.</p><p>
+<b>Symmetric-key cryptography</b><br/>
+Symmetric cryptography involves 2 parties using the same key to both encrypt and decrypt information they send between each other. This meant two communicating parties would first have to agree upon a shared key and was the basis for most classical encryption schemes. The image below describes how the plaintext file is first encrypted into a ciphertext before being transferred over a network to then be decrypted back into plain text by the recipient using the same key. This meant the line in which the ciphertext was sent could be compromised by an adversary without exposure of the plaintext (in theory).
+<img class="maxfill"  src="./img/kk1.png"/>[2]<br/>
+An example of a symmetric encryption scheme would be a stream cipher, or a block cipher.</p><p>
+<b>Public-key cryptography</b><br/>
+Public-key cryptography involves the use of two keys, a public key for encryption and a private key for decryption. The key management feature of public-key cryptography is that as the name suggests, one key is distributed publicly so that any party wishing to send information to another can encrypt using this public key. This message can then only be decrypted by that users corresponding private key, which as the name suggests must be kept private.
+<img class="maxfill" src="./img/kk2.png"/>[3]<br/>
+An example of a public-key encryption scheme would be the RSA algorithm, or the ELGamal scheme.
+In this Section
+The subsequent sections of this site explain four important uses of cryptography in cyber security, these are integrity, authenticity, confidentiality and privacy. These four key ideas can be traced back through classic cryptography through the use of ciphers like the Caesar cipher or the Vigenère cipher to modern implementations in the computer era, such the Advanced Encryption Standard (AES) and the RSA cryptosystem. These sections will describe the need for each characteristic, and give some examples or ideas how it may be implemented.</p><p>
+
+<b>[1]</b> Oxforddictionaries.com, (2015). cryptography - definition of cryptography in English from the Oxford dictionary. [online] Available <a href="http://www.oxforddictionaries.com/definition/english/cryptography">here</a> [Accessed 17 Oct. 2015].</p><p>
+
+<b>[2]</b>  2.bp.blogspot.com, (2015). [online] Available <a href="http://2.bp.blogspot.com/-6ZBjHc3kyx8/Uhh8oRbBzcI/AAAAAAAAFEA/FV8MOaobeTk/s1600/IC168364.gif">here</a> [Accessed 17 Oct. 2015].</p><p>
+<b>[3]</b> Blog.malwarebytes.org, (2015). [online] Available <a href="https://blog.malwarebytes.org/wp-content/uploads/2013/10/assemcrypto.gif">here</a> [Accessed 17 Oct. 2015].
+</p>
+            </div>
+        </div>
+    </div>
+</div>

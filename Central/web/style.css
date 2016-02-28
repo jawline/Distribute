@@ -1,0 +1,21 @@
+@font-face {
+    font-family: atomFont;
+    src: url(NOVABOLD.otf);
+}
+
+
+html, body {
+  width: 100%;
+  height: 100%;
+  font:12px/17px Arial, sans-serif;
+  overflow: hidden;
+}
+
+#controls {
+ position: fixed;
+ left: 20px;
+ top: 20px;
+}
+
+#vewport {
+}

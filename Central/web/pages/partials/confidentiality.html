@@ -1,0 +1,48 @@
+<div class="container">
+
+    <div class="small-gap panel panel-default">
+        <div class="panel-body">
+        <h2>
+		 Confidentiality
+		</h2>
+            <hr class="featurette-divider">
+            <div>
+                <p>
+
+Confidentiality is more often than not the first aspect considered when an individual is asked to think about cryptography. Mostly, the process of confidentiality consists of obfuscating or hiding information in such a way that only the intended recipients are capable of understanding or seeing the content of the message. The word confidentiality is often used synonymously with secrecy. The notion of perfect secrecy refers to any message in which no information about the plaintext (the original message) can be obtained from the ciphertext (the changed message).</p><p>
+
+<img class="maxfill"  src="./img/cave.png">[1]
+
+</p><p>
+Historically, confidentiality meant the implementation of systems such as codes, shift ciphers, Vigenère ciphers and more. Many of these systems were considered secure in their time, but nowadays their security is compromised due to the vastly-increased amount of processing power in the digital age. </p><p>
+
+These older systems required the use of a shared secret only known to the sender and recipient of the message; this shared secret, or key would be used by the sender in the encryption process to produce the ciphertext from the plaintext, then by the receiver to decrypt the received ciphertext, obtaining the plaintext. Cryptography invoking the use of a shared secret is defined as Private Key Cryptography. </p><p>
+
+<img class="maxfill" src="./img/key.png"/>[2]
+</p><p>
+Modern day algorithms such as AES, 3DES or RC4 utilise a shared secret between the two parties in order to provide confidential message exchange. These algorithms are of course much more sophisticated than historical encryption techniques, being resistant to all currently known attacks with keyspaces large enough to prevent exhaustive key search.</p><p>
+
+Another modern development is the creation of a confidential method of communication starting in an entirely public domain, i.e. dropping the need for a shared secret to be established before beginning communications. This is referred to as Public Key Cryptography. The most widely used Public-Key algorithms are RSA and ElGamal. In these systems, the intended recipient of confidential messages pre-computes a public key and a private key, keeping their private key secret whilst broadcasting the public key to all. Anybody who then wishes to send a message can encrypt their message with this public key, then send the message. The receiver then uses their private key for the decryption process.</p><p>
+
+
+This system works because the encryption/decryption process is carefully constructed to involve the use of one-way trapdoor functions; without knowledge of the private key it is not feasible to obtain the plaintext, even if the ciphertext, public key and encryption algorithm are known. Examples of one-way trapdoor functions (i.e. processes where it is extremely easy to compute in one direction, but very difficult to reverse the function except when an additional piece of information is known) are the RSA problem and the Discrete logarithm problem.  </p><p>
+
+<img class="maxfill"  src="./img/trap.png"/>[3]
+</p><p>
+How is all of this relevant to cyber security? Confidentiality is vital to our online presence, without adequate means of hiding our information from others during transit, it would be impossible for the internet to be as paramount in our daily lives. Cryptography enables any two individuals to safely correspond in a public domain, in particular the advent of Public Key Cryptography allows to complete strangers to securely communicate in an entirely public domain, which connected everyone in the world in a completely new way. Without it, the internet would be akin to the world’s largest encyclopaedia coupled with an enormous public forum; there would be no privacy as all messages between individuals could be intercepted. The internet could no longer function as a marketplace; any individuals would be unable to protect their payment information. The internet’s incredible capacity of connecting people all over the world who share similar thoughts and ideas would disintegrate.</p><p>
+
+In short, confidentiality is fundamental to the existence of the internet in the form we see today, for without it, our sense of cyber security would be utterly compromised. The ability to keep our belongings, money, work, opinions and beliefs out of the hands of others is what has allowed the internet to feature so prominently and usefully in our society. Keeping our information confidential is arguably the most important aspect of cyber security.</p><p>
+
+However, as always, caution is required. The importance of confidentiality cannot be understated, but it cannot operate alone. Other measures are needed to provide total invulnerability to malice, such as integrity, data authentication, non-repudiation and physical security to name a few.</p><p>
+
+<img class="maxfill" src="./img/xkcd.png">[4]
+</p><p>
+<b>[1]</b> <a href="https://www.cartoonstock.com/directory/e/encryption.asp">https://www.cartoonstock.com/directory/e/encryption.asp</a></p><p>
+<b>[2]</b> <a href="http://www.thegeekstuff.com/2012/07/cryptography-basics/">http://www.thegeekstuff.com/2012/07/cryptography-basics/</a></p><p>
+<b>[3]</b> <a href="http://www.cs.cornell.edu/courses/cs5430/2013sp/TL04.asymmetric.html">http://www.cs.cornell.edu/courses/cs5430/2013sp/TL04.asymmetric.html</a></p><p>
+<b>[4]</b> <a href="https://xkcd.com/538/">https://xkcd.com/538/</a>
+</p>
+            </div>
+        </div>
+    </div>
+</div>

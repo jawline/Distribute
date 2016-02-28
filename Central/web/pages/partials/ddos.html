@@ -1,0 +1,53 @@
+<div class="container">
+    <div class="small-gap panel panel-default">
+        <div class="panel-body">
+        <h2>
+		 DDOS
+		</h2>
+            <hr class="featurette-divider">
+            <div>
+                <p>DDoS stands for Distributed Denial of Service and is a type of Denial of Service (DoS) attack. In principal, a Denial of Service attack is based off the idea of flooding a particular machine or network resource with so much traffic so that it is made unavailable to its intended users. A physical or “real world” model of this, would be to imagine bringing a team of a ten thousand extras to all ride a particular local bus service. The bus would soon be full to capacity because of the extras, meaning that people who normally ride the bus would not be able to get on.</p><p>
+The differences between a Distributed Denial of Service and a Denial of Service attack is that the DDoS will use multiple computers to perform the attack, whereas the DoS typically uses one computer with network connection. Sometimes the attack may originate straight from an adversaries network of machines but in some cases, may stem from compromised machines under an adversaries control.</p><p>
+<b>Types of attack </b><br/>
+There are various types of DDoS attacks that can be implemented through various different stages of network architecture. Some are based through traffic attacks and others through application layer data. To gain an understanding of some common and important attacks as well as understand the sort structure of most attacks we shall look at some popular examples.
+Internet Control Message Protocol (ICMP) flooding</p><p>
+This type of attack is sometimes known as a “Smurf attack” and involves sending a large amount of Internet Control Message Protocol (ICMP) packets to exhaust the processing resources of a victim’s machine. This is achieved by an attacker who sends an ICMP Echo request to many nodes on the network that appear to come from the victim’s machine by using IP spoofing. Each node will then send the victim’s machine a reply to the Echo request. As each node only receives one (from the attacker) request and sends another (to the victim), they are unaffected by the attack. However the victim receives many ICMP packets simultaneously, and cannot process any other commands.</p><p>
+<b>SYN flooding</b><br/>
+SYN flooding extorts a weakness in the transmission control protocol (TCP), specifically it abuses the initial handshake procedure between two communicating parties in the following way. When a client initiates a TCP connection to a server it will first send a synchronisation message; SYN, to the server. The server acknowledges this and replies with a SYN/ACK message to the client. The client will then respond to the server with an ACK message to acknowledge both parties are ready for transmission. However should a malicious party repeatedly send SYN messages to a server with various spoofed sources, and then not send a subsequent ACK message after, the client can fill the designated space set to establish initial connections. This means that any other party who wishes to connect to the server is unable to do so, as all connections are full on unfinished handshakes.</p><p>
+This is nicely illustrated by the image below, where the attacker is in green and the effect innocent client is in pink. <img class="maxfill"  src="./img/syn.png"/>[1]
+</p><p><b>
+Preventions from attack</b><br/>
+Preventing a DDoS attack is not always an easy thing to do, personal attacks are sometimes difficult to overcome without help from the Internet Service Provider (ISP) and even large corporations can suffer from sophisticated attacks. The more primitive attacks such as the ICMP flood (Smurf attack) can mostly be prevented by the use of a correctly configured firewall, for example by blocking unused ports and blocking or limiting ICMP echo replies entering your network.</p><p>
+Larger companies sometimes use preventative measures such as bandwidth oversubscription; allowing for large increases in traffic by leasing larger than needed bandwidth capacities. Another technique is by using a Third-Party provider to redirected traffic or by using various DDoS mitigation tools to filter out malicious traffic.</p><p>
+Prevention can also be provided by finding the source of the attacker, this is notoriously hard to do, but not impossible. The initial sender is likely to be obscuring information about the origins of the message, but with the help of ISP’s or in some cases government progress can be made in tracking them down.</p><p>
+[5] [6]
+</p><p>
+<b>Implementations</b><br/>
+As previously mentioned, DDoS attacks are usually performed by a network of computers that are under the adversaries control. The name given to such a network is called a Botnet; robot network. Botnets usually comprise of computers that have been compromised by malware, and are often rented out by criminals as a service.</p><p>
+DDoS attacks can also be easily implemented using software. A good example of this is a piece of freeware known as LOIC – Low Orbit Ion Cannon. This was originally designed as a piece of stress-test software for small networks, but has been famously distributed and misused as a sort of “Download your own DDoS attack” it was used widely in the DDoS attacks against the Church of Scientology.</p><p>
+
+<img class="maxfill" src="./img/lion.png"/>[2]
+</p><p><b>
+Notable examples</b><br/>
+There are many notable and interesting example of DDoS attacks throughout history. The past couple of years seems to have been somewhat of a breeding ground for seemingly “untouchable” groups such as Anonymous, LulzSec and Lizardsquad. These groups regularly perform attacks ranging in severity and seriousness and I would like to highlight some of these.</p><p>
+Anonymous lay claim to what I think is a great example of a somewhat benign attack on an online game known as Habbo Hotel. This attack formed from an agreement on an online forum where users would all create identically dressed accounts and together cause havoc in game. One notable even was blocking access to the swimming pool, a Google search of “Pool’s closed” will almost ten years later show evidence of this attack.
+</p><p>
+<img class="maxfill" src="./img/habbo.png"/>[3]
+</p><p>
+Now of course this is “borderline” a DDoS and could be considered merely as a prank. If we think back to the bus model of denial of service though, it fundamentally fits in with the definition. This however was quite a significant event in the evolution of Anonymous, giving them a real idea of their resources and numbers.</p><p>
+This brings us on to the second example, again performed by the group Anonymous. This time the attack was far more sophisticated and malicious. This came after the company PayPal refused services to the whistle-blowing website WikiLeaks its then recent publishing of sensitive and classified documents. Anonymous responded revengefully, by successfully shutting down PayPal, Mastercard and Visa with DDoS attacks.</p><p>
+
+<img class="maxfill" src="./img/last.png"/>[4]<br/>
+
+</p><p>
+<b>[1]</b> Devcentral.f5.com, (2015). [online] Available <a href="https://devcentral.f5.com/Portals/0/images/metapost/News-Articles/ltwagnon/2013/Apr/Windows-Live-Writer-74c02fc9b247_F599-Presentation1_2.jpg">here</a> [Accessed 26 Oct. 2015].
+</p><p>
+<b>[2]</b>  I4.ytimg.com, (2015). [online] Available <a href="http://i4.ytimg.com/vi/C-mQHoS3218/maxresdefault.jpg">here</a> [Accessed 26 Oct. 2015].</p><p>
+<b>[3]</b> S3.amazonaws.com, (2015). [online] Available <a href="https://s3.amazonaws.com/rapgenius/1358223863_long.jpg">here</a> [Accessed 26 Oct. 2015].</p><p>
+<b>[4]</b> Twitter, (2015). j gannon on Twitter. [online] Available <a href="https://twitter.com/lunaslave/status/12617657488515072">here</a> [Accessed 26 Oct. 2015].</p><p><b>
+[5]</b> Cert.org, (2015). CA-1996-21. [online] Available <a href="http://www.cert.org/advisories/CA-1996-21.html">here</a> [Accessed 26 Oct. 2015].</p><p>
+<b>[6]</b>  Iss.net, (2015). Smurf denial of service (Smurf). [online] Available <a href="http://www.iss.net/security_center/reference/vuln/Smurf.htm">here</a> [Accessed 26 Oct. 2015].</p>
+            </div>
+        </div>
+    </div>
+</div>

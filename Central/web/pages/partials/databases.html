@@ -1,0 +1,50 @@
+<div class="container">
+   <div class="small-gap panel panel-default">
+      <div class="panel-body">
+         <h2>
+            Databases
+         </h2>
+         <hr class="featurette-divider">
+         <div>
+            <p>
+               Cyber attacks committed via security weaknesses in applications using databases is certainly more common than any other type of attack. Between Q1 2012 and Q2 2012 tan estimated 97% of all attacks were composed of SQL injection attacks [1]. In an SQL injection, the attacker formulates inputs in order to misuse the application logic and execute arbitrary SQL commands on the database. In doing so the SQL query provided is ran as the database user and the database is ran as the system user that is running the database. Many systems are misconfigured or do not take into account proper security settings in order limit access to these users In which case the SQLi may escalate to taking control of the target host. There are many mitigations a sysadmin can do to prevent the exploitability against SQLi attacks such as checking privileges of database users and creating a sole system user to run the database. This can stop users executing arbitrary commands, limit reading and writing of certain files and database tables. The most common mitigation for SQLi attacks is to make sure all user input is escaped so that all quotation marks and comments are accounted for and the application logic is not changed.
+            </p>
+            <h4>Example SQLi attacks</h4>
+            <p>
+               <code>
+               `SELECT COUNT(*) FROM accounts WHERE username = '$1' AND password = '$2'`
+               </code>
+            </p>
+            <p>
+               <code>$1 = `admin`<br/>
+               $2 = `' OR '1' = '1`</code>
+            </p>
+            <p>
+               <code>
+               `SELECT COUNT(*) FROM accounts WHERE username = 'admin' AND password = '' OR '1' = '1'`
+               </code>
+            </p>
+            <p>
+               Using the SQL Command `SELECT ... INTO OUTFILE` an attacker can write files with the permissions of the database user to the file system. These files may be executable and thus an attacker can remotely execute code on the system. An attacker can also use the SQL command EXEC if the database user has permission.
+            </p>
+            <p>
+               <code>
+               `EXEC xp_cmdshell 'Mallicious command'`
+               </code>
+            </p>
+            <p>
+               An SQL injection cheat sheet for gaining information about the target system can be obtained <a href="http://pentestmonkey.net/cheat-sheet/sql-injection/mysql-sql-injection-cheat-sheet">here</a> [2].
+            </p>
+            <img class="maxfill" src="http://cis1.towson.edu/~cssecinj/wp-content/uploads/sqlInjections2.JPG">
+            <img class="maxfill" src="https://i.kinja-img.com/gawker-media/image/upload/s--9JebkEFT--/c_fill,fl_progressive,g_north,h_358,q_80,w_636/18mpenleoksq8jpg.jpg">
+            <br/><br/>
+            <div>
+               <p><b>[1]</b> - <a href="http://www.techworld.com/news/security/barclays-97-percent-of-data-breaches-still-due-sql-injection-3331283/">http://www.techworld.com/news/security/barclays-97-percent-of-data-breaches-still-due-sql-injection-3331283/</a></p>
+            </div>
+            <div>
+               <p><b>[2]</b> - <a href="http://pentestmonkey.net/cheat-sheet/sql-injection/mysql-sql-injection-cheat-sheet">http://pentestmonkey.net/cheat-sheet/sql-injection/mysql-sql-injection-cheat-sheet</a></p>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
