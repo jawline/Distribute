@@ -1,1 +1,5 @@
-target
+*~
+*target*
+*lock
+logs/log*
+*.DS_Store
