@@ -3,7 +3,7 @@
 use fccore::config::Config;
 use std::thread::sleep_ms;
 use simplelog::Log;
-use fccore::job::Job;
+use fccore::job::{Job, JobState};
 
 use time;
 
@@ -44,10 +44,10 @@ impl Core {
 
         let mut microbench = Job::new("Microbenchmarks");
 
-        microbench.add_child(Job::new("Test 1"));
-        microbench.add_child(Job::new("Test 2"));
-        microbench.add_child(Job::new("Test 4"));
-        microbench.add_child(Job::new("Test 3"));
+        microbench.add_child(Job::new_with_state("Test 1", JobState::Failed));
+        microbench.add_child(Job::new_with_state("Test 2", JobState::InProgress));
+        microbench.add_child(Job::new_with_state("Test 4", JobState::InProgress));
+        microbench.add_child(Job::new_with_state("Test 3", JobState::Success));
         microbench.add_child(Job::new("Test 5"));
         microbench.add_child(Job::new("Test 6"));
         microbench.add_child(Job::new("Test 7"));
@@ -55,7 +55,7 @@ impl Core {
         core.jobs.add_child(microbench);
 
         let mut browser = Job::new("Browser Tests");
-        browser.add_child(Job::new("Test 1"));
+        browser.add_child(Job::new_with_state("Test 1", JobState::InProgress));
         browser.add_child(Job::new("Test 2"));
         browser.add_child(Job::new("Test 3"));
         browser.add_child(Job::new("Test 4"));
@@ -64,9 +64,9 @@ impl Core {
         core.jobs.add_child(browser);
 
         let mut other = Job::new("Other Tests");
-        other.add_child(Job::new("Test 1"));
-        other.add_child(Job::new("Test 2"));
-        other.add_child(Job::new("Test 3"));
+        other.add_child(Job::new_with_state("Test 1", JobState::Success));
+        other.add_child(Job::new_with_state("Test 2", JobState::Success));
+        other.add_child(Job::new_with_state("Test 3", JobState::Success));
         core.jobs.add_child(other);
 
         let mut crypto = Job::new("Crypto Tests");

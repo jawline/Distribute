@@ -31,13 +31,17 @@ pub struct Job {
 impl Job {
 
 	pub fn new(name: &str) -> Job {
+		Job::new_with_state(name, JobState::NotStarted)
+	}
+
+	pub fn new_with_state(name: &str, state: JobState) -> Job {
 		unsafe {
 
 			let result = Job {
 				uid: LAST_UID,
 				task_name: name.to_string(),
 				children: Vec::new(),
-				state: JobState::Failed
+				state: state
 			};
 
 			LAST_UID = LAST_UID + 1;

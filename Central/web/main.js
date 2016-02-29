@@ -5,7 +5,7 @@ var Colors = {
     failed: '#cc0000'
 };
 
-var LEVEL_BASE = 60;
+var LEVEL_BASE = 70;
 var LEVEL_STEP = 10;
 var LEVEL_MIN = 40;
 
@@ -258,9 +258,17 @@ $(document).ready(function() {
 
     var nodes = [];
 
+    function updateNode(job) {
+        var node = sys.getNode(job.uid);
+        node.data.name = job.name;
+        node.data.color = Colors[job.state];
+    }
+
     function addNode(job, level) {
 
-        if (!nodes[job.uid]) {
+        if (nodes[job.uid]) {
+            updateNode(job);
+        } else {
             make(job.uid, job.name, '', Math.max(LEVEL_BASE - (LEVEL_STEP * level), LEVEL_MIN), 10, 1, Colors[job.state]);
             nodes[job.uid] = true;
         }
