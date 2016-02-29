@@ -5,6 +5,10 @@ var Colors = {
     failed: '#cc0000'
 };
 
+var LEVEL_BASE = 60;
+var LEVEL_STEP = 10;
+var LEVEL_MIN = 40;
+
 var Renderer = function(canvas) {
     var canvas = $(canvas).get(0);
     var ctx = canvas.getContext("2d");
@@ -55,23 +59,19 @@ var Renderer = function(canvas) {
                     ctx.lineTo(pt2.x + offset.scale(i).x - totalOffset.x / 2, pt2.y + offset.scale(i).y - totalOffset.y / 2);
                     ctx.stroke();
                 }
-
             })
 
             particleSystem.eachNode(function(node, pt) {
-                // node: {mass:#, p:{x,y}, name:"", data:{}}
-                // pt:   {x:#, y:#}  node position in screen coords
 
                 ctx.moveTo(0, 0);
-
-                // draw a rectangle centered at pt
                 ctx.fillStyle = node.data.color;
 
+                //Fill the node body
                 ctx.beginPath();
                 ctx.arc(pt.x, pt.y, node.data.weight, 0, 6 * Math.PI, false);
                 ctx.fill();
-                ctx.lineWidth = 4;
 
+                //Draw the node title
                 var title = node.data.title;
                 ctx.fillStyle = node.data.textColor;
                 ctx.font = node.data.fontSize + 'pt atomFont';
@@ -206,6 +206,7 @@ $(document).ready(function() {
       });
     }
 
+    /**
     //Fake central
     make('Central', 'Central', '', 80, 12, 10);
 
@@ -216,21 +217,21 @@ $(document).ready(function() {
     make('J4', 'Crypto', '', 50, 12, 5, Colors.failed);
 
     //Fake tasks
-    make('J1T1', 'Task 1', '', 30, 8, 1, Colors.success);
-    make('J1T2', 'Task 2', '', 30, 8, 1, Colors.success);
-    make('J1T3', 'Task 3', '', 30, 8, 1, Colors.success);
+    make('J1T1', 'Task 1', '', 35, 10, 1, Colors.success);
+    make('J1T2', 'Task 2', '', 35, 10, 1, Colors.success);
+    make('J1T3', 'Task 3', '', 35, 10, 1, Colors.success);
 
-    make('J2T1', 'Task 1', '', 30, 8, 1, Colors.success);
-    make('J2T2', 'Task 2', '', 30, 8, 1, Colors.in_progress);
-    make('J2T3', 'Task 3', '', 30, 8, 1, Colors.not_started);
+    make('J2T1', 'Task 1', '', 35, 10, 1, Colors.success);
+    make('J2T2', 'Task 2', '', 35, 10, 1, Colors.in_progress);
+    make('J2T3', 'Task 3', '', 35, 10, 1, Colors.not_started);
 
-    make('J3T1', 'Task 1', '', 30, 8, 1, Colors.not_started);
-    make('J3T2', 'Task 2', '', 30, 8, 1, Colors.not_started);
-    make('J3T3', 'Task 3', '', 30, 8, 1, Colors.not_started);
+    make('J3T1', 'Task 1', '', 35, 10, 1, Colors.not_started);
+    make('J3T2', 'Task 2', '', 35, 10, 1, Colors.not_started);
+    make('J3T3', 'Task 3', '', 35, 10, 1, Colors.not_started);
 
-    make('J4T1', 'Task 1', '', 30, 8, 1, Colors.success);
-    make('J4T2', 'Task 2', '', 30, 8, 1, Colors.failed);
-    make('J4T3', 'Task 3', '', 30, 8, 1, Colors.failed);
+    make('J4T1', 'Task 1', '', 35, 10, 1, Colors.success);
+    make('J4T2', 'Task 2', '', 35, 10, 1, Colors.failed);
+    make('J4T3', 'Task 3', '', 35, 10, 1, Colors.failed);
 
     //Link central
     link('Central', 'J1', 1);
@@ -253,5 +254,25 @@ $(document).ready(function() {
 
     link('J4', 'J4T1', 1);
     link('J4', 'J4T2', 1);
-    link('J4', 'J4T3', 1);
+    link('J4', 'J4T3', 1);*/
+
+    var nodes = [];
+
+    function addNode(job, level) {
+
+        if (!nodes[job.uid]) {
+            make(job.uid, job.name, '', Math.max(LEVEL_BASE - (LEVEL_STEP * level), LEVEL_MIN), 10, 1, Colors[job.state]);
+            nodes[job.uid] = true;
+        }
+
+        job.children.forEach(function(child) {
+            addNode(child, level + 1);
+            link(job.uid, child.uid, 1);
+        });
+    }
+
+    new StatusAPI("http://localhost:14320").repeat(function(data) {
+        console.log('Got update ' + JSON.stringify(data));
+        addNode(data.job, 0);
+    }).start();
 });

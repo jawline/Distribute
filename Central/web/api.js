@@ -1,4 +1,52 @@
-function StatusAPI() {}
+var TIMEOUT_DELAY = 200;
 
-StatusAPI.prototype.once = function(cb) {}
-StatusAPI.prototype.repeat = function(cb) {}
+function StatusAPI(serverPath) {
+	this._path = serverPath;
+	this._onceList = [];
+	this._repeatList = [];
+}
+
+StatusAPI.prototype._path = null;
+StatusAPI.prototype._onceList = null;
+StatusAPI.prototype._repeatList = null;
+
+StatusAPI.prototype.start = function() {
+	this._requeue();
+	return this;
+}
+
+StatusAPI.prototype._requeue = function() {
+	setTimeout(function() {
+		$.getJSON(this._path).done(this._done.bind(this)).fail(this._fail.bind(this));
+	}.bind(this), TIMEOUT_DELAY);
+}
+
+StatusAPI.prototype._done = function(data) {
+
+	this._onceList.forEach(function(item) {
+		item(data);
+	});
+
+	this._onceList.length = 0;
+
+	this._repeatList.forEach(function(item) {
+		item(data);
+	});
+
+	this._requeue();
+}
+
+StatusAPI.prototype._fail = function(data) {
+	console.log('Failed to get update');
+	this._requeue();
+}
+
+StatusAPI.prototype.once = function(cb) {
+	this._onceList.push(cb);
+	return this;
+}
+
+StatusAPI.prototype.repeat = function(cb) {
+	this._repeatList.push(cb);
+	return this;
+}

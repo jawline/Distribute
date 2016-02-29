@@ -42,6 +42,40 @@ impl Core {
             config: config
         };
 
+        let mut microbench = Job::new("Microbenchmarks");
+
+        microbench.add_child(Job::new("Test 1"));
+        microbench.add_child(Job::new("Test 2"));
+        microbench.add_child(Job::new("Test 4"));
+        microbench.add_child(Job::new("Test 3"));
+        microbench.add_child(Job::new("Test 5"));
+        microbench.add_child(Job::new("Test 6"));
+        microbench.add_child(Job::new("Test 7"));
+
+        core.jobs.add_child(microbench);
+
+        let mut browser = Job::new("Browser Tests");
+        browser.add_child(Job::new("Test 1"));
+        browser.add_child(Job::new("Test 2"));
+        browser.add_child(Job::new("Test 3"));
+        browser.add_child(Job::new("Test 4"));
+        browser.add_child(Job::new("Test 5"));
+        browser.add_child(Job::new("Test 6"));
+        core.jobs.add_child(browser);
+
+        let mut other = Job::new("Other Tests");
+        other.add_child(Job::new("Test 1"));
+        other.add_child(Job::new("Test 2"));
+        other.add_child(Job::new("Test 3"));
+        core.jobs.add_child(other);
+
+        let mut crypto = Job::new("Crypto Tests");
+        crypto.add_child(Job::new("Test 1"));
+        crypto.add_child(Job::new("Test 2"));
+        crypto.add_child(Job::new("Test 3"));
+        
+        core.jobs.add_child(crypto);
+
         core.log.add(TAG, &format!("Connecting to server {} with key {}", &core.config.server_url, &core.config.api_key));
         core
     }
