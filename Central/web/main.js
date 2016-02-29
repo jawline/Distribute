@@ -282,7 +282,7 @@ $(document).ready(function() {
     }
 
     new StatusAPI("http://localhost:14320").repeat(function(data) {
-        console.log('Got update ' + JSON.stringify(data));
         addNode(data.job, 0);
+        sys.renderer.redraw();
     }).start();
 });

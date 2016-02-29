@@ -6,4 +6,5 @@ authors = [ "Blake Loring <blake_l@parsed.uk>" ]
 [dependencies]
 time = "*"
 rustc-serialize = "*"
+rand = "*"
 simplelog = { git = "https://github.com/jawline/SimpleLog.git" }

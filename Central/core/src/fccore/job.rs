@@ -1,4 +1,5 @@
 use std::vec::Vec;
+use rand;
 
 static mut LAST_UID: usize = 0;
 
@@ -85,7 +86,13 @@ impl Job {
 			}
 			base
 		} else {
-			self.state.clone()
+			let x = rand::random::<u8>() % 20;
+			match x {
+				13 => JobState::Success,
+				19 => JobState::InProgress,
+				16 => JobState::Failed,
+				_ => self.state.clone()
+			}
 		}
 	}
 }

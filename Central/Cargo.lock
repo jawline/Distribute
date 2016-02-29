@@ -43,6 +43,7 @@ dependencies = [
 name = "fccore"
 version = "0.0.1"
 dependencies = [
+ "rand 0.3.14 (registry+https://github.com/rust-lang/crates.io-index)",
  "rustc-serialize 0.3.18 (registry+https://github.com/rust-lang/crates.io-index)",
  "simplelog 0.1.0 (git+https://github.com/jawline/SimpleLog.git)",
  "time 0.1.34 (registry+https://github.com/rust-lang/crates.io-index)",
