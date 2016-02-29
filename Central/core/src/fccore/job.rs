@@ -86,13 +86,7 @@ impl Job {
 			}
 			base
 		} else {
-			let x = rand::random::<u8>() % 20;
-			match x {
-				13 => JobState::Success,
-				19 => JobState::InProgress,
-				16 => JobState::Failed,
-				_ => self.state.clone()
-			}
+			self.state.clone()
 		}
 	}
 }
