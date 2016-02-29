@@ -10,9 +10,7 @@ pub struct LogConfig {
 
 #[derive(RustcEncodable, RustcDecodable)]
 pub struct Config {
-    pub log_config: LogConfig,
-    pub server_url: String,
-    pub api_key: String
+    pub log_config: LogConfig
 }
 
 impl Config {

@@ -38,7 +38,7 @@ impl Core {
         let mut core = Core {
             alive: true,
             log: Log::new(&format!("{}log{}", LOG_DIR, time::now().to_timespec().sec), config.log_config.log_limit),
-            jobs: Job::new("Central"),
+            jobs: Job::new("Base"),
             config: config
         };
 
@@ -55,28 +55,32 @@ impl Core {
         core.jobs.add_child(microbench);
 
         let mut browser = Job::new("Browser Tests");
+
         browser.add_child(Job::new_with_state("Test 1", JobState::InProgress));
         browser.add_child(Job::new("Test 2"));
         browser.add_child(Job::new("Test 3"));
         browser.add_child(Job::new("Test 4"));
         browser.add_child(Job::new("Test 5"));
         browser.add_child(Job::new("Test 6"));
+
         core.jobs.add_child(browser);
 
         let mut other = Job::new("Other Tests");
+
         other.add_child(Job::new_with_state("Test 1", JobState::Success));
         other.add_child(Job::new_with_state("Test 2", JobState::Success));
         other.add_child(Job::new_with_state("Test 3", JobState::Success));
+
         core.jobs.add_child(other);
 
         let mut crypto = Job::new("Crypto Tests");
+
         crypto.add_child(Job::new("Test 1"));
         crypto.add_child(Job::new("Test 2"));
         crypto.add_child(Job::new("Test 3"));
         
         core.jobs.add_child(crypto);
 
-        core.log.add(TAG, &format!("Connecting to server {} with key {}", &core.config.server_url, &core.config.api_key));
         core
     }
 

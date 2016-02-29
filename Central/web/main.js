@@ -39,7 +39,7 @@ var Renderer = function(canvas) {
 
             function drawTitle(text) {
                 ctx.moveTo(0, 0);
-                ctx.font = "24px Arial";
+                ctx.font = "24px atomFont";
                 ctx.fillStyle = "black";
                 var size = ctx.measureText(text);
                 ctx.fillText(text, 160, 55);
@@ -79,6 +79,8 @@ var Renderer = function(canvas) {
                 var metrics = ctx.measureText(title);
                 ctx.fillText(title, pt.x, pt.y + node.data.fontSize / 2);
             });
+
+            drawTitle('Distribution Center');
         },
 
         initMouseHandling: function() {
