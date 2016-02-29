@@ -43,8 +43,8 @@ var Renderer = function(canvas) {
 
             particleSystem.eachEdge(function(edge, pt1, pt2) {
 
-                ctx.strokeStyle = "rgba(0,0,0, .333)";
-                ctx.lineWidth = 4;
+                ctx.strokeStyle = "#f2f2f2";
+                ctx.lineWidth = 2;
 
                 var offset = Vector(pt2.x, pt2.y).subtract(Vector(pt1.x, pt1.y)).normal().perp().scale(bondDistance);
                 var totalOffset = offset.scale(edge.data.bonds);
@@ -71,12 +71,10 @@ var Renderer = function(canvas) {
                 ctx.arc(pt.x, pt.y, node.data.weight, 0, 6 * Math.PI, false);
                 ctx.fill();
                 ctx.lineWidth = 4;
-                ctx.strokeStyle = '#003300';
-                ctx.stroke();
 
                 var title = node.data.title;
                 ctx.fillStyle = node.data.textColor;
-                ctx.font = node.data.fontSize + 'pt arial';
+                ctx.font = node.data.fontSize + 'pt atomFont';
                 ctx.textAlign = 'center';
                 var metrics = ctx.measureText(title);
                 ctx.fillText(title, pt.x, pt.y + node.data.fontSize / 2);
@@ -235,10 +233,10 @@ $(document).ready(function() {
     make('J4T3', 'Task 3', '', 30, 8, 1, Colors.failed);
 
     //Link central
-    link('Central', 'J1', '2');
-    link('Central', 'J2', '2');
-    link('Central', 'J3', '2');
-    link('Central', 'J4', '2');
+    link('Central', 'J1', 1);
+    link('Central', 'J2', 1);
+    link('Central', 'J3', 1);
+    link('Central', 'J4', 1);
 
     //Tasks
     link('J1', 'J1T1', 1);

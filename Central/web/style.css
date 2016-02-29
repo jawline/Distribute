@@ -1,8 +1,7 @@
 @font-face {
     font-family: atomFont;
-    src: url(NOVABOLD.otf);
+    src: url(font.otf);
 }
-
 
 html, body {
   width: 100%;
