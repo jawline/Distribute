@@ -300,7 +300,7 @@ $(document).ready(function() {
         }
     }
 
-    new StatusAPI("http://localhost:14320").repeat(function(data) {
+    new StatusAPI("http://" + window.location.hostname  + ":14320").repeat(function(data) {
         touchedNodes.length = 0;
         addNode(data.job, 0);
         clearNodes();
