@@ -4,6 +4,7 @@ use fccore::config::Config;
 use std::thread::sleep_ms;
 use simplelog::Log;
 use fccore::job::{Job, JobState};
+use rand;
 
 use time;
 
@@ -84,7 +85,24 @@ impl Core {
         core
     }
 
-    pub fn update(&mut self) {}
+    fn deep_random(job: &mut Job) {
+        if job.children.len() == 0 {
+            job.state = match rand::random::<u8>() % 10 {
+                1 | 2 | 3 => JobState::Success,
+                5 => JobState::InProgress,
+                9 => JobState::Failed,
+                _ => JobState::NotStarted
+            };
+        } else {
+            for child in &mut job.children {
+                Core::deep_random(child);
+            }
+        }
+    }
+
+    pub fn update(&mut self) {
+        Core::deep_random(&mut self.jobs);
+    }
 
     /**
      * Get the core config struct

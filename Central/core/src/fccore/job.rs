@@ -1,5 +1,4 @@
 use std::vec::Vec;
-use rand;
 
 static mut LAST_UID: usize = 0;
 
