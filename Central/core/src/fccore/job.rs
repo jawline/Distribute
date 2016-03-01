@@ -75,7 +75,7 @@ impl Job {
 			for child in &self.children {
 				match child.get_state(){
 					JobState::Success => {
-						if base != JobState::Failed && base != JobState::InProgress {
+						if base != JobState::Failed && base != JobState::InProgress && base != JobState::NotStarted {
 							base = JobState::Success
 						}
 					},
@@ -91,7 +91,7 @@ impl Job {
 					},
 
 					JobState::NotStarted => {
-						if base != JobState::Success && base != JobState::InProgress && base != JobState::Failed {
+						if base != JobState::InProgress && base != JobState::Failed {
 							base = JobState::NotStarted;
 						}
 					}

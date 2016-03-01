@@ -3,7 +3,7 @@ use std::sync::{Arc, Mutex};
 use std::thread::{spawn, sleep_ms, JoinHandle};
 
 const TAG: &'static str = "fccore_logic";
-const LOOP_DELAY_MS: u32 = 500;
+const LOOP_DELAY_MS: u32 = 1500;
 
 pub fn start_logic_thread(core: &Arc<Mutex<Core>>) -> JoinHandle<()> {
     let thread_core = core.clone();
