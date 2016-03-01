@@ -3,6 +3,7 @@ use std::sync::{Arc, Mutex};
 use std::thread::{spawn, sleep_ms, JoinHandle};
 
 const TAG: &'static str = "fccore_logic";
+const LOOP_DELAY_MS: u32 = 150;
 
 pub fn start_logic_thread(core: &Arc<Mutex<Core>>) -> JoinHandle<()> {
     let thread_core = core.clone();
@@ -15,7 +16,7 @@ fn fccore_thread_loop(core_ref: Arc<Mutex<Core>>) {
 
     while core_ref.lock().unwrap().alive {
     	core_ref.lock().unwrap().update();
-    	sleep_ms(25);
+    	sleep_ms(LOOP_DELAY_MS);
     }
 
     core_ref.lock().unwrap().log_mut().add(TAG, "Core is no longer alive, logic thread exit");
