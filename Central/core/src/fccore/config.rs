@@ -10,7 +10,8 @@ pub struct LogConfig {
 
 #[derive(RustcEncodable, RustcDecodable)]
 pub struct Config {
-    pub log_config: LogConfig
+    pub log_config: LogConfig,
+    pub job_config: String
 }
 
 impl Config {

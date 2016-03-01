@@ -1,4 +1,5 @@
 use std::vec::Vec;
+use fccore::job_config::JobConfig;
 
 static mut LAST_UID: usize = 0;
 
@@ -29,6 +30,19 @@ pub struct Job {
 }
 
 impl Job {
+
+	pub fn from_config(config: &JobConfig) -> Job {
+
+		let mut new_job = Job::new(&config.name);
+
+		let children: Vec<Job> = config.children.iter().map(|child_config| Job::from_config(child_config)).collect();
+
+		for child in children {
+			new_job.add_child(child);
+		}
+
+		new_job
+	}
 
 	pub fn new(name: &str) -> Job {
 		Job::new_with_state(name, JobState::NotStarted)

@@ -21,12 +21,12 @@ impl JobConfig {
     }
   
     pub fn load(base_file: &str) -> JobConfig {
-        let text = Config::read_config_file(base_file);
+        let text = JobConfig::read_config_file(base_file);
         return json::decode(&text).unwrap();
     }
 }
 
-impl ToString for Config {
+impl ToString for JobConfig {
     fn to_string(&self) -> String {
         json::encode(self).unwrap()
     }
