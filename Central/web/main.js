@@ -259,6 +259,7 @@ $(document).ready(function() {
     link('J4', 'J4T3', 1);*/
 
     var nodes = [];
+    var touchedNodes = [];
 
     function updateNode(job) {
         var node = sys.getNode(job.uid);
@@ -267,6 +268,8 @@ $(document).ready(function() {
     }
 
     function addNode(job, level) {
+
+        touchedNodes[job.uid] = true;
 
         if (nodes[job.uid]) {
             updateNode(job);
@@ -281,8 +284,26 @@ $(document).ready(function() {
         });
     }
 
+    function removeNode(n) {
+        sys.removeNode(n);
+        delete nodes[n];
+    }
+
+    /**
+     * Clears out nodes which are no longer in the list
+     */
+    function clearNodes() {
+        for (var n in nodes) {
+            if (!touchedNodes[n]) {
+                removeNode(n);
+            }
+        }
+    }
+
     new StatusAPI("http://localhost:14320").repeat(function(data) {
+        touchedNodes.length = 0;
         addNode(data.job, 0);
+        clearNodes();
         sys.renderer.redraw();
     }).start();
 });
