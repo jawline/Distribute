@@ -1,7 +1,6 @@
 #![allow(dead_code)]
 
 use fccore::config::Config;
-use std::thread::sleep_ms;
 use simplelog::Log;
 use fccore::job::{Job, JobState};
 use fccore::job_config::JobConfig;
@@ -59,7 +58,7 @@ impl Core {
     fn deep_random(job: &mut Job) {
         if job.children.len() == 0 {
             if job.state == JobState::NotStarted || job.state == JobState::InProgress {
-                job.state = match rand::random::<u8>() % 10 {
+                job.state = match rand::random::<u8>() % 40 {
                     1 | 2 | 3 => JobState::Success,
                     5 => JobState::InProgress,
                     9 => JobState::Failed,
