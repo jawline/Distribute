@@ -10,6 +10,7 @@ use fcwebserve::job::SerializedJob;
 
 #[derive(RustcEncodable)]
 struct Status {
+    pub id: usize,
     pub alive: bool,
     pub job: SerializedJob
 }
@@ -17,6 +18,7 @@ struct Status {
 impl Status {
     pub fn from(core: &MutexGuard<Core>) -> Status {
         Status{
+            id: core.rid,
             alive: core.alive,
             job: SerializedJob::new(&core.jobs)
         }
