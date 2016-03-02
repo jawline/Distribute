@@ -43,16 +43,14 @@ impl Core {
     pub fn new(config_file : &str) -> Core {
         let config = Config::load(config_file);
         
-        let mut core = Core {
+        Core {
             rid: rand::random::<usize>(),
             alive: true,
             log: Log::new(&format!("{}log{}", LOG_DIR, time::now().to_timespec().sec), config.log_config.log_limit),
             jobs: Job::from_config(&JobConfig::load(&config.job_config)),
             nodes: Vec::new(),
             config: config
-        };
-
-        core
+        }
     }
 
     fn deep_random(job: &mut Job) {

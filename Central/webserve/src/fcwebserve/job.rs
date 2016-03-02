@@ -1,4 +1,3 @@
-use rustc_serialize::json;
 use fccore::job::Job;
 
 #[derive(RustcEncodable, RustcDecodable)]

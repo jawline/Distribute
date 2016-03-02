@@ -1,12 +1,10 @@
 use iron::prelude::*;
 use iron::status;
-use iron::Url;
 use std::path::Path;
 use staticfile::Static;
 use mount::Mount;
 use fccore::Core;
 use std::thread;
-use std::str::FromStr;
 use std::sync::{Arc, Mutex};
 use hyper::header::AccessControlAllowOrigin;
 use fcwebserve::config::Config;
@@ -23,7 +21,7 @@ fn unknown(core_ref : &Arc<Mutex<Core>>) -> Response {
 }
 fn page_handler(req : &mut Request, core : &Arc<Mutex<Core>>) -> IronResult<Response> {    	
   
-    let full_req_path = req.url.path.iter().fold(String::new(), |curr, next| curr + "/" + next);
+    //let full_req_path = req.url.path.iter().fold(String::new(), |curr, next| curr + "/" + next);
     
     let response = if req.url.path.len() != 0 {
         let base_cmd : &str = &req.url.path[0].clone();
