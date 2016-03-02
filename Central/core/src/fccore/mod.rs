@@ -3,6 +3,7 @@ pub mod core;
 pub mod core_logic;
 pub mod job;
 pub mod job_config;
+pub mod node;
 
 pub use fccore::core::Core;
 use std::thread::{JoinHandle};

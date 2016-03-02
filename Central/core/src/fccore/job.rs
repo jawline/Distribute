@@ -70,7 +70,7 @@ impl Job {
 
 	pub fn get_state(&self) -> JobState {
 		if self.children.len() > 0 {
-			let mut base = JobState::NotStarted;
+			let mut base = JobState::Success;
 
 			for child in &self.children {
 				match child.get_state(){

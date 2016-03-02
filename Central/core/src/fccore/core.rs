@@ -5,6 +5,7 @@ use std::thread::sleep_ms;
 use simplelog::Log;
 use fccore::job::{Job, JobState};
 use fccore::job_config::JobConfig;
+use fccore::node::Node;
 use rand;
 
 use time;
@@ -25,6 +26,7 @@ pub struct Core {
     config: Config,
 
     pub jobs: Job,
+    pub nodes: Vec<Node>,
   
     /**
      * Core log, stores log messages and timestamps
@@ -41,6 +43,7 @@ impl Core {
             alive: true,
             log: Log::new(&format!("{}log{}", LOG_DIR, time::now().to_timespec().sec), config.log_config.log_limit),
             jobs: Job::from_config(&JobConfig::load(&config.job_config)),
+            nodes: Vec::new(),
             config: config
         };
 
@@ -49,12 +52,14 @@ impl Core {
 
     fn deep_random(job: &mut Job) {
         if job.children.len() == 0 {
-            job.state = match rand::random::<u8>() % 10 {
-                1 | 2 | 3 => JobState::Success,
-                5 => JobState::InProgress,
-                9 => JobState::Failed,
-                _ => JobState::NotStarted
-            };
+            if job.state == JobState::NotStarted || job.state == JobState::InProgress {
+                job.state = match rand::random::<u8>() % 10 {
+                    1 | 2 | 3 => JobState::Success,
+                    5 => JobState::InProgress,
+                    9 => JobState::Failed,
+                    _ => JobState::NotStarted
+                };
+            }
         } else {
             for child in &mut job.children {
                 Core::deep_random(child);
