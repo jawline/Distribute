@@ -210,6 +210,7 @@ $(document).ready(function() {
 
     var nodes = [];
     var touchedNodes = [];
+    var lid;
 
     function updateNode(job) {
         var node = sys.getNode(job.uid);
@@ -252,6 +253,12 @@ $(document).ready(function() {
 
     new StatusAPI("http://" + window.location.hostname  + ":14320").repeat(function(data) {
         touchedNodes.length = 0;
+
+        if (lid !== data.id) {
+            clearNodes();
+            lid = data.id;
+        }
+
         addNode(data.job, 0);
         clearNodes();
         sys.renderer.redraw();
