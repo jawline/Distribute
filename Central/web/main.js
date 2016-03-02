@@ -208,56 +208,6 @@ $(document).ready(function() {
       });
     }
 
-    /**
-    //Fake central
-    make('Central', 'Central', '', 80, 12, 10);
-
-    //Fake jobs
-    make('J1', 'Microbench', '', 50, 12, 5, Colors.success);
-    make('J2', 'Browser', '', 50, 12, 5, Colors.in_progress);
-    make('J3', 'NodeJS', '', 50, 12, 5, Colors.not_started);
-    make('J4', 'Crypto', '', 50, 12, 5, Colors.failed);
-
-    //Fake tasks
-    make('J1T1', 'Task 1', '', 35, 10, 1, Colors.success);
-    make('J1T2', 'Task 2', '', 35, 10, 1, Colors.success);
-    make('J1T3', 'Task 3', '', 35, 10, 1, Colors.success);
-
-    make('J2T1', 'Task 1', '', 35, 10, 1, Colors.success);
-    make('J2T2', 'Task 2', '', 35, 10, 1, Colors.in_progress);
-    make('J2T3', 'Task 3', '', 35, 10, 1, Colors.not_started);
-
-    make('J3T1', 'Task 1', '', 35, 10, 1, Colors.not_started);
-    make('J3T2', 'Task 2', '', 35, 10, 1, Colors.not_started);
-    make('J3T3', 'Task 3', '', 35, 10, 1, Colors.not_started);
-
-    make('J4T1', 'Task 1', '', 35, 10, 1, Colors.success);
-    make('J4T2', 'Task 2', '', 35, 10, 1, Colors.failed);
-    make('J4T3', 'Task 3', '', 35, 10, 1, Colors.failed);
-
-    //Link central
-    link('Central', 'J1', 1);
-    link('Central', 'J2', 1);
-    link('Central', 'J3', 1);
-    link('Central', 'J4', 1);
-
-    //Tasks
-    link('J1', 'J1T1', 1);
-    link('J1', 'J1T2', 1);
-    link('J1', 'J1T3', 1);
-
-    link('J2', 'J2T1', 1);
-    link('J2', 'J2T2', 1);
-    link('J2', 'J2T3', 1);
-
-    link('J3', 'J3T1', 1);
-    link('J3', 'J3T2', 1);
-    link('J3', 'J3T3', 1);
-
-    link('J4', 'J4T1', 1);
-    link('J4', 'J4T2', 1);
-    link('J4', 'J4T3', 1);*/
-
     var nodes = [];
     var touchedNodes = [];
 
@@ -285,7 +235,7 @@ $(document).ready(function() {
     }
 
     function removeNode(n) {
-        sys.removeNode(n);
+        sys.pruneNode(n);
         delete nodes[n];
     }
 
@@ -305,5 +255,9 @@ $(document).ready(function() {
         addNode(data.job, 0);
         clearNodes();
         sys.renderer.redraw();
+    }).fail(function(data) {
+        console.log('Failed');
+        touchedNodes.length = 0;
+        clearNodes();
     }).start();
 });

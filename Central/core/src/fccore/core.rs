@@ -16,6 +16,11 @@ const LOG_DIR : &'static str = "./logs/";
 pub struct Core {
 
     /**
+     * Random ID generated once when core is created
+     */
+    pub rid: usize,
+
+    /**
      * Is the core alive
      */
     pub alive: bool,
@@ -40,6 +45,7 @@ impl Core {
         let config = Config::load(config_file);
         
         let mut core = Core {
+            rid: rand::random::<usize>(),
             alive: true,
             log: Log::new(&format!("{}log{}", LOG_DIR, time::now().to_timespec().sec), config.log_config.log_limit),
             jobs: Job::from_config(&JobConfig::load(&config.job_config)),
