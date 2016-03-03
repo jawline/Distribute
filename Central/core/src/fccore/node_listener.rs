@@ -6,6 +6,8 @@ use std::sync::{Arc, Mutex};
 
 pub fn node_listener(address: &str, core: Arc<Mutex<Core>>) {
 
+	println!("Launching node listener on {}", address);
+
 	let listener = TcpListener::bind(address).unwrap();
 
 	// accept connections and process them, spawning a new thread for each one
@@ -24,6 +26,8 @@ pub fn node_listener(address: &str, core: Arc<Mutex<Core>>) {
 	    }
 
 	}
+
+	println!("Node listener closing");
 
 	// close the socket server
 	drop(listener);
