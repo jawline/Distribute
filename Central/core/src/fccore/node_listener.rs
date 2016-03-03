@@ -12,6 +12,16 @@ pub fn start_node_listener(core: Arc<Mutex<Core>>) -> JoinHandle<()> {
     spawn(move || { node_listener(&addr, core); } )
 }
 
+fn handshake(node: &mut Node) -> bool {
+	node.write_line("CENTRAL0");
+
+	if node.read_line() == "NODE0" {
+		true
+	} else {
+		false
+	}
+}
+
 pub fn node_listener(address: &str, core: Arc<Mutex<Core>>) {
 
 	println!("Launching node listener on {}", address);
@@ -29,7 +39,14 @@ pub fn node_listener(address: &str, core: Arc<Mutex<Core>>) {
 	    match stream {
 	        Ok(stream) => {
 	        	core.lock().unwrap().log_mut().add(TAG, "Accepting new node");
-				core.lock().unwrap().add_node(Node::new(stream))
+
+	        	let mut node = Node::new(stream);
+
+	        	if handshake(&mut node) {
+					core.lock().unwrap().add_node(node);
+				} else {
+					println!("New node failed handshake");
+				}
 	        },
 	        Err(_) => { println!("Connection from node failed"); }
 	    }

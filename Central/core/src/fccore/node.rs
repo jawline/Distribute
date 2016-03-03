@@ -24,10 +24,10 @@ impl Node {
 	pub fn read_line(&mut self) -> String {
 		let mut line = String::new();
 		self.reader().read_line(&mut line);
-		return line;
+		return line.trim().to_string();
 	}
 
 	pub fn write_line(&mut self, line: &str) {
-		write!(self.writer(), "{}", line);
+		write!(self.writer(), "{}\n", line);
 	}
 }
