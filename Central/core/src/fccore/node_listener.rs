@@ -1,5 +1,5 @@
-use std::net::{TcpListener, TcpStream};
-use std::thread::{spawn, sleep, JoinHandle};
+use std::net::{TcpListener};
+use std::thread::{spawn, JoinHandle};
 use fccore::node::Node;
 use fccore::core::Core;
 use std::sync::{Arc, Mutex};
@@ -31,7 +31,7 @@ pub fn node_listener(address: &str, core: Arc<Mutex<Core>>) {
 	        	core.lock().unwrap().log_mut().add(TAG, "Accepting new node");
 				core.lock().unwrap().add_node(Node::new(stream))
 	        },
-	        Err(e) => { println!("Connection from node failed"); }
+	        Err(_) => { println!("Connection from node failed"); }
 	    }
 	}
 
