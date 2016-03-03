@@ -1,11 +1,13 @@
+use std::net::TcpStream;
+
 pub struct Node {
-	pub id: usize
+	pub conn: TcpStream
 }
 
 impl Node {
-	pub fn new(id: usize) -> Node {
+	pub fn new(conn: TcpStream) -> Node {
 		Node {
-			id: id
+			conn: Stream
 		}
 	}
 }
