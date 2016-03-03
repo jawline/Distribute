@@ -7,7 +7,7 @@ pub struct Node {
 impl Node {
 	pub fn new(conn: TcpStream) -> Node {
 		Node {
-			conn: Stream
+			conn: conn
 		}
 	}
 }

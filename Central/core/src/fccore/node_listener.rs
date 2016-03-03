@@ -6,6 +6,10 @@ pub fn node_listener(address: &str, core: Arc<Mutex<Core>>) {
 
 	let listener = TcpListener::bind(address).unwrap();
 
+	fn handle_client(stream) {
+		
+	}
+
 	// accept connections and process them, spawning a new thread for each one
 	for stream in listener.incoming() {
 	    match stream {
