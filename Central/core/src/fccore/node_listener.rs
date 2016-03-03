@@ -13,13 +13,32 @@ pub fn start_node_listener(core: Arc<Mutex<Core>>) -> JoinHandle<()> {
 }
 
 fn handshake(node: &mut Node) -> bool {
+
 	node.write_line("CENTRAL0");
 
-	if node.read_line() == "NODE0" {
-		true
-	} else {
-		false
+	if node.read_line() != "NODE0" {
+		return false;
 	}
+
+	if node.read_line() != "PRINT_FEATURES" {
+		return false;
+	}
+
+	let mut features = Vec::new();
+
+	loop {
+		let line = node.read_line();
+
+		if line == "DONE_FEATURES" {
+			break;
+		}
+		
+		features.push(line);
+	}
+
+	node.write_line("THANKS");
+
+	true
 }
 
 pub fn node_listener(address: &str, core: Arc<Mutex<Core>>) {
