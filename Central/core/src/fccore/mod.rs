@@ -4,6 +4,7 @@ pub mod core_logic;
 pub mod job;
 pub mod job_config;
 pub mod node;
+pub mod node_listener;
 
 pub use fccore::core::Core;
 use std::thread::{JoinHandle};
@@ -17,6 +18,7 @@ const TAG: &'static str = "fccore";
 pub fn spawn_fc(base_cfg_path : &str) -> (Arc<Mutex<Core>>, JoinHandle<()>) {
     let core = Arc::new(Mutex::new(Core::new(base_cfg_path)));
     let handle = core_logic::start_logic_thread(&core);
+
     core.lock().unwrap().log_mut().add(TAG, "done spawning core");
     return (core, handle);
 }
