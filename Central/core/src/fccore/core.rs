@@ -70,6 +70,10 @@ impl Core {
         }
     }
 
+    pub fn add_node(&mut self, node: Node) {
+        self.nodes.push(node);
+    }
+
     pub fn update(&mut self) {
         Core::deep_random(&mut self.jobs);
     }

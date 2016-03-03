@@ -7,19 +7,14 @@ pub fn node_listener(address: &str, core: Arc<Mutex<Core>>) {
 	let listener = TcpListener::bind(address).unwrap();
 
 	fn handle_client(stream) {
-		
+		core.lock().unwrap().add_node(Node::new(stream));
 	}
 
 	// accept connections and process them, spawning a new thread for each one
 	for stream in listener.incoming() {
 	    match stream {
-	        Ok(stream) => {
-	            thread::spawn(move|| {
-	                // connection succeeded
-	                handle_client(stream)
-	            });
-	        }
-	        Err(e) => { /* connection failed */ }
+	        Ok(stream) => handle_client(stream),
+	        Err(e) => { println!("Connection from node failed"); }
 	    }
 	}
 
