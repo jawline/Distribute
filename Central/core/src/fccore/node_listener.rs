@@ -28,6 +28,7 @@ pub fn node_listener(address: &str, core: Arc<Mutex<Core>>) {
 
 	    match stream {
 	        Ok(stream) => {
+	        	core.lock().unwrap().log_mut().add(TAG, "Accepting new node");
 				core.lock().unwrap().add_node(Node::new(stream))
 	        },
 	        Err(e) => { println!("Connection from node failed"); }
