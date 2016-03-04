@@ -4,7 +4,7 @@ use fccore::config::Config;
 use simplelog::Log;
 use fccore::job::{Job, JobState};
 use fccore::job_config::JobConfig;
-use fccore::node::Node;
+use protocol::node::Node;
 use rand;
 
 use time;

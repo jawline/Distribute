@@ -1,6 +1,7 @@
 use std::net::{TcpListener};
 use std::thread::{spawn, JoinHandle};
-use fccore::node::Node;
+use protocol::node::Node;
+use protocol::handshakes::server_handshake;
 use fccore::core::Core;
 use std::sync::{Arc, Mutex};
 
@@ -10,35 +11,6 @@ pub fn start_node_listener(core: Arc<Mutex<Core>>) -> JoinHandle<()> {
     core.lock().unwrap().log_mut().add(TAG, "starting logic thread loop");
     let addr = core.lock().unwrap().config().listener_address.to_string();
     spawn(move || { node_listener(&addr, core); } )
-}
-
-fn handshake(node: &mut Node) -> bool {
-
-	node.write_line("CENTRAL0");
-
-	if node.read_line() != "NODE0" {
-		return false;
-	}
-
-	if node.read_line() != "PRINT_FEATURES" {
-		return false;
-	}
-
-	let mut features = Vec::new();
-
-	loop {
-		let line = node.read_line();
-
-		if line == "DONE_FEATURES" {
-			break;
-		}
-		
-		features.push(line);
-	}
-
-	node.write_line("THANKS");
-
-	true
 }
 
 pub fn node_listener(address: &str, core: Arc<Mutex<Core>>) {
@@ -61,11 +33,14 @@ pub fn node_listener(address: &str, core: Arc<Mutex<Core>>) {
 
 	        	let mut node = Node::new(stream);
 
-	        	if handshake(&mut node) {
-					core.lock().unwrap().add_node(node);
-				} else {
-					println!("New node failed handshake");
-				}
+	        	let handshake_result = server_handshake(&mut node);
+
+	        	match handshake_result {
+	        		Ok(()) => { core.lock().unwrap().add_node(node) },
+	        		Err(msg) => {
+	        			core.lock().unwrap().log_mut().add(TAG, &("Handshake failed because ".to_string() + &msg));
+	        		}
+	        	}
 	        },
 	        Err(_) => { println!("Connection from node failed"); }
 	    }

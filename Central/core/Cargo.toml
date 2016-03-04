@@ -8,3 +8,6 @@ time = "*"
 rustc-serialize = "*"
 rand = "*"
 simplelog = { git = "https://github.com/jawline/SimpleLog.git" }
+
+[dependencies.protocol]
+path = "../../Protocol/"
