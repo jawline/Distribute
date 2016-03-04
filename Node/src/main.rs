@@ -7,9 +7,12 @@ use protocol::handshakes::client_handshake;
 fn main() {
     let mut node = Node::new(TcpStream::connect("127.0.0.1:19760").unwrap());
 
-    if !client_handshake(&mut node) {
-    	println!("Handshake failed");
-    } else {
-    	println!("Handshake was fine");
+    let handshake_result = client_handshake(&mut node);
+
+    match handshake_result {
+    	Ok(()) => { println!("Handshake done"); },
+    	Err(why) => {
+ 			println!("Handshake failed because {}", why);
+    	}
     }
 }

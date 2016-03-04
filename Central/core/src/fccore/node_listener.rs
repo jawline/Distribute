@@ -31,16 +31,20 @@ pub fn node_listener(address: &str, core: Arc<Mutex<Core>>) {
 	        Ok(stream) => {
 	        	core.lock().unwrap().log_mut().add(TAG, "Accepting new node");
 
-	        	let mut node = Node::new(stream);
+	        	let core = core.clone();
 
-	        	let handshake_result = server_handshake(&mut node);
+	        	spawn(move || {
+		        	let mut node = Node::new(stream);
 
-	        	match handshake_result {
-	        		Ok(()) => { core.lock().unwrap().add_node(node) },
-	        		Err(msg) => {
-	        			core.lock().unwrap().log_mut().add(TAG, &("Handshake failed because ".to_string() + &msg));
-	        		}
-	        	}
+		        	let handshake_result = server_handshake(&mut node);
+
+		        	match handshake_result {
+		        		Ok(()) => { core.lock().unwrap().add_node(node) },
+		        		Err(msg) => {
+		        			core.lock().unwrap().log_mut().add(TAG, &("Handshake failed because ".to_string() + &msg));
+		        		}
+		        	}
+	        	});
 	        },
 	        Err(_) => { println!("Connection from node failed"); }
 	    }

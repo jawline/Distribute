@@ -2,32 +2,29 @@ use std::net::TcpStream;
 use std::io::{BufRead, BufReader, Write, BufWriter};
 
 pub struct Node {
-	pub conn: TcpStream
+	pub conn: BufReader<TcpStream>
 }
 
 impl Node {
 	
 	pub fn new(conn: TcpStream) -> Node {
 		Node {
-			conn: conn
+			conn: BufReader::new(conn)
 		}
 	}
 
-	fn reader(&mut self) -> BufReader<&TcpStream> {
-		BufReader::new(&self.conn)
-	}
-
-	fn writer(&mut self) -> BufWriter<&TcpStream> {
-		BufWriter::new(&self.conn)
+	pub fn flush(&mut self) {
+		self.conn.get_ref().flush();
 	}
 
 	pub fn read_line(&mut self) -> String {
 		let mut line = String::new();
-		self.reader().read_line(&mut line);
+		self.conn.read_line(&mut line);
 		return line.trim().to_string();
 	}
 
 	pub fn write_line(&mut self, line: &str) {
-		write!(self.writer(), "{}\n", line);
+		write!(self.conn.get_ref(), "{}\n", line);
+		self.flush();
 	}
 }
