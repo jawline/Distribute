@@ -39,7 +39,14 @@ pub fn node_listener(address: &str, core: Arc<Mutex<Core>>) {
 		        	let handshake_result = server_handshake(&mut node);
 
 		        	match handshake_result {
-		        		Ok(()) => { core.lock().unwrap().add_node(node) },
+		        		Ok(()) => { 
+		        			
+		        			for feature in &node.features {
+								core.lock().unwrap().log_mut().add(TAG, &("Feature ".to_string() + &feature));
+		        			}
+
+		        			core.lock().unwrap().add_node(node) 
+		        		},
 		        		Err(msg) => {
 		        			core.lock().unwrap().log_mut().add(TAG, &("Handshake failed because ".to_string() + &msg));
 		        		}
