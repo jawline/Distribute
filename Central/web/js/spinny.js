@@ -1,15 +1,8 @@
-var States = {
-    None: "none",
-    Started: "started",
-    Busy: "busy"
-};
-
 function Spinny(loader, lbar, rbar, settings) {
     this.loader = loader;
     this.left_bar = lbar;
     this.right_bar = rbar;
     this.settings = settings || {};
-    this._state = States.None
 }
 
 Spinny.prototype._applySpin = function(ldp) {
@@ -22,16 +15,11 @@ Spinny.prototype._applySpin = function(ldp) {
 }
 
 Spinny.prototype.start = function() {
-
-    this._state = States.Started;
     this._applySpin(this.loader);
-
     return this;
 }
 
 Spinny.prototype.reset = function(doneCallback) {
-
-    this._state = States.Busy;
 
     var numDone = 0;
 
