@@ -28,6 +28,8 @@ Spinny.prototype.start = function() {
 
 Spinny.prototype.reset = function(doneCallback) {
 
+    this._state = States.Busy;
+
     var numDone = 0;
 
     var thisArg = this;
@@ -39,7 +41,9 @@ Spinny.prototype.reset = function(doneCallback) {
                 opacity: 100
             }, {
                 duration: this.settings.fade_duration || 1000
-            }).velocity({loop: true, rotateZ: 360}, {duration: 1500, loop: true});
+            }).velocity({loop: true, rotateZ: 360}, {duration: 1500, loop: true, complete: function() {
+
+            }});
         }
     }.bind(this);
 
@@ -60,7 +64,7 @@ Spinny.prototype.reset = function(doneCallback) {
 
 Spinny.prototype.stop = function() {
 
-    this.loader.velocity({
+    this.loader.velocity("stop").velocity({
         opacity: 0
     }, {
         queue: false,
