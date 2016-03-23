@@ -12,16 +12,19 @@ function Spinny(loader, lbar, rbar, settings) {
     this._state = States.None
 }
 
-Spinny.prototype.start = function() {
-
-    this._state = States.Started;
-
-    this.loader.velocity({
-        rotateZ: 360
+Spinny.prototype._applySpin = function(ldp) {
+    return ldp.velocity({
+        rotateZ: "+360"
     }, {
         duration: 1500,
         loop: true
     });
+}
+
+Spinny.prototype.start = function() {
+
+    this._state = States.Started;
+    this._applySpin(this.loader);
 
     return this;
 }
@@ -37,13 +40,12 @@ Spinny.prototype.reset = function(doneCallback) {
     var postDone = function() {
     	numDone++;
         if (numDone == 2) {
-            this.loader.velocity({
+            var ldr = this.loader.velocity({
                 opacity: 100
             }, {
                 duration: this.settings.fade_duration || 1000
-            }).velocity({loop: true, rotateZ: 360}, {duration: 1500, loop: true, complete: function() {
-
-            }});
+            });
+            this._applySpin(ldr);
         }
     }.bind(this);
 
@@ -65,11 +67,11 @@ Spinny.prototype.reset = function(doneCallback) {
 Spinny.prototype.stop = function() {
 
     this.loader.velocity("stop").velocity({
-        opacity: 0
+        opacity: 0,
+        rotateZ: "+360"
     }, {
-        queue: false,
         loop: 0,
-        duration: this.settings.fade_duration || 1000,
+        duration: this.settings.fade_duration || 500,
         complete: function() {
                 this.left_bar.velocity({
                     left: '-50%'
@@ -84,5 +86,6 @@ Spinny.prototype.stop = function() {
                 });
         }.bind(this),
     });
+
     return this;
 }
