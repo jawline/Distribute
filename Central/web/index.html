@@ -8,9 +8,12 @@
 	<title>Central Intelligence</title>
 
 	<link href="css/bootstrap.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="css/spinny.css" type="text/css">
 	<link rel="stylesheet" href="style.css" type="text/css">
 
+    <script src="js/spinny.js"></script>
     <script src="js/jquery.js"></script>
+    <script src="js/velocity.min.js"></script>
 	  
 	  <!-- Include all compiled plugins (below), or include individual files as needed -->
 	  <script src="js/bootstrap.min.js"></script>
@@ -18,11 +21,18 @@
 <body>
 
 <!-- run from the minified library file: -->
-<script src="lib/arbor.js"></script>  
+<script src="lib/arbor.js"></script>
 <script src="vector.js"></script>  
 <script src="api.js"></script>
 <script src="main.js"></script>
 <canvas id="viewport"></canvas>
+
+
+    <div id="lb" class="bar"></div>
+    <div id="rb" class="bar right-bar"></div>
+    <div id="loader" class="loader">
+        <span class="glyphicon glyphicon-cog"></span>
+    </div>
 
 </body>
 </html>
